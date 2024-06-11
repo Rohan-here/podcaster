@@ -10,15 +10,27 @@ const openai = new OpenAI({
 export const generateAudioAction = action({
   args: { input: v.string(), voice: v.string() },
   handler: async (_, { voice, input }) => {
-    const mp3 = await openai.audio.speech.create({
-      model: "tts-1",
-      voice: voice as SpeechCreateParams["voice"],
-      input,
-    });
+    console.log(voice, input);
+    if (!voice) {
+      throw new Error(
+        "Voice parameter is required and must be a non-null string"
+      );
+    }
 
-    const buffer = await mp3.arrayBuffer();
+    try {
+      const mp3 = await openai.audio.speech.create({
+        model: "tts-1",
+        voice: voice as SpeechCreateParams["voice"],
+        input,
+      });
 
-    return buffer;
+      const buffer = await mp3.arrayBuffer();
+
+      return buffer;
+    } catch (error) {
+      console.error("Error generating audio:", error);
+      throw new Error("Failed to generate audio");
+    }
   },
 });
 
