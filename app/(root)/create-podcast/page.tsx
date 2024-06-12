@@ -98,7 +98,7 @@ const CreatePodcast = () => {
       setIsSubmitting(false);
       router.push("/");
     } catch (error) {
-      console.log(error);
+      console.error(error);
       toast({ title: "Error", variant: "destructive" });
       setIsSubmitting(false);
     }

@@ -30,7 +30,6 @@ const useGeneratePodcast = ({
   const generatePodcast = async () => {
     setIsGenerating(true);
     setAudio("");
-    console.log(voicePrompt, voiceType);
 
     if (!voicePrompt) {
       toast({
@@ -44,8 +43,6 @@ const useGeneratePodcast = ({
         voice: voiceType,
         input: voicePrompt,
       });
-
-      console.log(response);
 
       const blob = new Blob([response], { type: "audio/mpeg" });
 
