@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@clerk/clerk-react": "^5.2.3",
-    "@clerk/nextjs": "^5.1.4",
+    "@clerk/nextjs": "^5.1.5",
     "@hookform/resolvers": "^3.6.0",
     "@radix-ui/react-label": "^2.0.2",
     "@radix-ui/react-select": "^2.0.0",
@@ -20,6 +20,9 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "convex": "^1.12.1",
+    "embla-carousel": "^8.1.4",
+    "embla-carousel-autoplay": "^8.1.4",
+    "embla-carousel-react": "^8.1.4",
     "lucide-react": "^0.383.0",
     "next": "14.2.3",
     "openai": "^4.49.1",
