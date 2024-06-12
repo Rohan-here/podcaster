@@ -10,7 +10,6 @@ const openai = new OpenAI({
 export const generateAudioAction = action({
   args: { input: v.string(), voice: v.string() },
   handler: async (_, { voice, input }) => {
-    console.log(voice, input);
     if (!voice) {
       throw new Error(
         "Voice parameter is required and must be a non-null string"
