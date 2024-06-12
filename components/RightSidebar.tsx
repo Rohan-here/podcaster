@@ -10,16 +10,23 @@ import { useQuery } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 import LoaderSpinner from "./LoaderSpinner";
+import { useAudio } from "@/providers/AudioProvider";
+import { cn } from "@/lib/utils";
 
 const RightSidebar = () => {
   const { user } = useUser();
   const topPodcasters = useQuery(api.users.getTopUserByPodcastCount);
   const router = useRouter();
+  const { audio } = useAudio();
 
   if (!topPodcasters) return <LoaderSpinner />;
 
   return (
-    <section className="right_sidebar text-white-1">
+    <section
+      className={cn("right_sidebar h-[calc(100vh-5px]", {
+        "h-[calc(100vh - 140px)]": audio?.audioUrl,
+      })}
+    >
       <SignedIn>
         <Link href={`/profile/${user?.id}`} className="flex gap-3 pb-12">
           <UserButton />
@@ -46,7 +53,7 @@ const RightSidebar = () => {
           {topPodcasters?.slice(0, 4).map((podcaster) => (
             <div
               key={podcaster._id}
-              className="flex justify-between items-center"
+              className="flex justify-between items-center cursor-pointer"
               onClick={() => router.push(`/profile/${podcaster.clerkId}`)}
             >
               <figure className="flex items-center gap-2 ">
@@ -62,7 +69,7 @@ const RightSidebar = () => {
                 </h2>
               </figure>
               <div className="flex items-center">
-                <p className="text-12 font-normal">
+                <p className="text-12 font-normal text-white-1">
                   {podcaster.totalPodcasts} podcasts
                 </p>
               </div>
